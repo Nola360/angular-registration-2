@@ -1,0 +1,226 @@
+<form
+  [formGroup]="registrationForm"
+  (ngSubmit)="$event.preventDefault(); submitRegistrationForm()"
+  class="container mb-3 p-5 col-md-6 border border-1 mt-3"
+>
+  <h1 class="text-center mb-3">Registration Form</h1>
+  <div class="row">
+    <div class="form-group mb-3 col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Firstname"
+        formControlName="firstname"
+      />
+      <small
+        *ngIf="
+          registrationForm.get('firstname')?.invalid &&
+          (registrationForm.get('firstname')?.dirty ||
+            registrationForm.get('firstname')?.touched)
+        "
+        class="text-danger"
+        >*This field cannot be left empty</small
+      >
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Lastname"
+        formControlName="lastname"
+      />
+      <small
+        *ngIf="
+          registrationForm.get('lastname')?.invalid &&
+          (registrationForm.get('lastname')?.dirty ||
+            registrationForm.get('lastname')?.touched)
+        "
+        class="text-danger"
+        >*This field cannot be left empty</small
+      >
+    </div>
+    <div class="form-group mb-3 col-md-12">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <small
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          (registrationForm.get('email')?.dirty ||
+            registrationForm.get('email')?.touched)
+        "
+        class="text-danger"
+        >*Field cannot be left empty</small
+      >
+      <small
+        *ngIf="registrationForm.get('email')?.hasError('email')"
+        class="text-danger"
+        >*Invalid email</small
+      >
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input
+        type="date"
+        class="form-control"
+        placeholder="Dob"
+        formControlName="dob"
+      />
+      <small
+        *ngIf="
+          registrationForm.get('dob')?.invalid &&
+          (registrationForm.get('dob')?.dirty ||
+            registrationForm.get('dob')?.touched)
+        "
+        class="text-danger"
+        >*Field cannot be left empty</small
+      >
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        formControlName="username"
+      />
+      <small
+        *ngIf="
+          registrationForm.get('username')?.invalid &&
+          (registrationForm.get('username')?.dirty ||
+            registrationForm.get('username')?.touched)
+        "
+        class="text-danger"
+        >*Field cannot be left empty</small
+      >
+    </div>
+    <div class="form-group mb-3 col-lg-4" style="margin-left: auto">
+      <button type="button" class="form-control btn btn-primary">
+        Create a username
+      </button>
+    </div>
+    <div class="row col-md-12">
+      <label class="form-label">Gender</label>
+      <div class="form-group col-sm-4 col-md-4">
+        <input type="radio" value="Male" formControlName="gender" />
+        <label class="form-label">Male</label>
+      </div>
+      <div class="form-group col-sm-4 col-md-4">
+        <input type="radio" value="Female" formControlName="gender" />
+        <label class="form-label">Female</label>
+      </div>
+      <div class="form-group col-sm-4 col-md-4">
+        <input type="radio" value="Other" formControlName="gender" />
+        <label class="form-label">Prefere not to say</label>
+      </div>
+      <small
+        *ngIf="
+          registrationForm.get('gender')?.invalid &&
+          (registrationForm.get('gender')?.dirty ||
+            registrationForm.get('gender')?.touched)
+        "
+        class="text-danger"
+        >*Field cannot be left empty</small
+      >
+    </div>
+
+    <div class="row" formGroupName="address">
+      <label class="form-label">Address</label>
+      <div class="form-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Street Address"
+          formControlName="street"
+        />
+        <small
+          *ngIf="
+            registrationForm.get('address.street')?.invalid &&
+            (registrationForm.get('address.street')?.dirty ||
+              registrationForm.get('address.street')?.touched)
+          "
+          class="text-danger"
+          >*Field cannot be left empty</small
+        >
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="City"
+          formControlName="city"
+        />
+        <small
+          *ngIf="
+            registrationForm.get('address.city')?.invalid &&
+            (registrationForm.get('address.city')?.dirty ||
+              registrationForm.get('address.city')?.touched)
+          "
+          class="text-danger"
+          >*Field cannot be left empty</small
+        >
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <select class="form-select" formControlName="states">
+          <option class="form-option" disabled selected value="">State</option>
+          <option
+            *ngFor="let state of states"
+            [value]="state.abbriviation"
+            class="form-option"
+          >
+            {{ state.name }}
+          </option>
+        </select>
+        <small
+          *ngIf="
+            registrationForm.get('address.states')?.invalid &&
+            (registrationForm.get('address.states')?.dirty ||
+              registrationForm.get('address.states')?.touched)
+          "
+          class="text-danger"
+          >*Field cannot be left empty</small
+        >
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Region"
+          formControlName="region"
+        />
+        <small
+          *ngIf="
+            registrationForm.get('address.region')?.invalid &&
+            (registrationForm.get('address.region')?.dirty ||
+              registrationForm.get('address.region')?.touched)
+          "
+          class="text-danger"
+          >*Field cannot be left empty</small
+        >
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Zipcode"
+          formControlName="zipcode"
+        />
+        <small
+          *ngIf="
+            registrationForm.get('address.zipcode')?.invalid &&
+            (registrationForm.get('address.zipcode')?.dirty ||
+              registrationForm.get('address.zipcode')?.touched)
+          "
+          class="text-danger"
+          >*Field cannot be left empty</small
+        >
+      </div>
+      <div class="form-group">
+        <button type="button" class="form-control btn btn-primary">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
