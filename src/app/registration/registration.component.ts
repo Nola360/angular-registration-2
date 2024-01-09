@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -8,8 +8,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+  deleteSkill(index: number) {
+    const skill = this.registrationForm.get('skills') as FormArray;
+    skill.removeAt(index);
+  }
   submitRegistrationForm() {
-    console.log(this.registrationForm.get('firstname'));
+    console.log(this.registrationForm);
   }
   constructor(private http: HttpClient) {}
   registrationForm!: FormGroup;
@@ -33,8 +37,24 @@ export class RegistrationComponent implements OnInit {
         city: new FormControl('', Validators.required),
         region: new FormControl('', Validators.required),
         states: new FormControl('', Validators.required),
-        zipcode: new FormControl('', Validators.required),
+        zipcode: new FormControl('', [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(5),
+        ]),
       }),
+      skills: new FormArray([new FormControl('', Validators.required)]),
     });
+  }
+
+  addSkill() {
+    (<FormArray>this.registrationForm.get('skills')).push(
+      new FormControl('', Validators.required)
+    );
+  }
+
+  get Skills() {
+    const skill = this.registrationForm.get('skills') as FormArray;
+    return skill;
   }
 }
