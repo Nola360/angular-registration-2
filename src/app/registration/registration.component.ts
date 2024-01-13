@@ -44,6 +44,7 @@ export class RegistrationComponent implements OnInit {
         ]),
       }),
       skills: new FormArray([new FormControl('', Validators.required)]),
+      experience: new FormArray([]),
     });
   }
 
@@ -56,5 +57,29 @@ export class RegistrationComponent implements OnInit {
   get Skills() {
     const skill = this.registrationForm.get('skills') as FormArray;
     return skill;
+  }
+
+  addExperience() {
+    const expGroup = new FormGroup({
+      company: new FormControl('', Validators.required),
+      position: new FormControl('', Validators.required),
+      years: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+    });
+
+    (<FormArray>this.registrationForm.get('experience')).push(expGroup);
+  }
+
+  get Experience() {
+    const experience = this.registrationForm.get('experience') as FormArray;
+    return experience;
+  }
+
+  deleteExperience(index: number) {
+    const expGroup = this.registrationForm.get('experience') as FormArray;
+    console.log(index);
+    console.log(expGroup);
+    expGroup.removeAt(index);
   }
 }

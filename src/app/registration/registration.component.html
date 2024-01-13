@@ -100,18 +100,18 @@
     </div>
   </div>
 
-  <div class="form-group mb-3 col-lg-4" style="margin-left: auto">
+  <div class="form-group mb-3 col-md-4" style="margin-left: auto">
     <button type="button" class="form-control btn btn-primary">
       Create a username
     </button>
   </div>
-  <div class="row col-md-12">
+  <div class="row">
     <label class="form-label">Gender</label>
-    <div class="form-group col-sm-4 col-md-4">
+    <div class="form-group col-sm-4 col-md-2">
       <input type="radio" value="Male" formControlName="gender" />
       <label class="form-label">Male</label>
     </div>
-    <div class="form-group col-sm-4 col-md-4">
+    <div class="form-group col-sm-4 col-md-2">
       <input type="radio" value="Female" formControlName="gender" />
       <label class="form-label">Female</label>
     </div>
@@ -240,6 +240,7 @@
     </div>
   </div>
   <label class="form-label">Add Skill</label>
+  <!-- Container div for add skills input and button -->
   <div
     class="row mb-3"
     formArrayName="skills"
@@ -253,6 +254,7 @@
         [formControlName]="i"
       />
     </div>
+    <!-- Delete skill button -->
     <div class="form-group col-md-2">
       <button
         type="button"
@@ -262,6 +264,8 @@
         Delete
       </button>
     </div>
+    <!-- Delete skill button end -->
+    <!-- Error message  -->
     <small
       *ngIf="
         Skills.controls[i].invalid &&
@@ -271,7 +275,8 @@
       >*This field cannot be left empty.</small
     >
   </div>
-
+  <!-- Input container end -->
+  <!-- Add skill button start -->
   <div class="form-group mb-3">
     <button
       type="button"
@@ -281,7 +286,69 @@
       Add skill
     </button>
   </div>
+  <!-- Add skill button end -->
+  <!-- Add Experience start -->
 
+  <label class="form-label">Work History</label>
+  <div
+    class="row border border-2 rounded mb-3"
+    formArrayName="experience"
+    *ngFor="let experience of Experience.controls; let i = index"
+  >
+    <label class="form-label mt-2">Experience {{ i + 1 }}</label>
+    <div class="form-group mb-3" [formGroupName]="i">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Compnay"
+        formControlName="company"
+      />
+    </div>
+
+    <div class="form-group mb-3 col-md-6" formControlName="position">
+      <select class="form-select">
+        <option class="form-option" disabled selected value="">Position</option>
+        <option value="Junior Developer">Junior Developer</option>
+        <option value="Senior Developer">Senior Developer</option>
+        <option value="Lead Architech">Lead Architech</option>
+      </select>
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Expereince"
+        formControlName="years"
+      />
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input type="date" class="form-control" formControlName="startDate" />
+    </div>
+    <div class="form-group mb-3 col-md-6">
+      <input type="date" class="form-control" formControlName="endDate" />
+    </div>
+    <div class="form-group mb-3 col-md-4">
+      <button
+        type="button"
+        class="form-control btn btn-primary"
+        (click)="deleteExperience(i)"
+        style="margin-left: auto"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group mb-3 col-sm-4">
+    <button
+      type="button"
+      class="btn btn-primary form-control"
+      (click)="addExperience()"
+    >
+      Add Expereince
+    </button>
+  </div>
+  <!-- Registration submit button start -->
   <div class="form-group">
     <button
       [disabled]="registrationForm.invalid"
@@ -291,4 +358,5 @@
       Register
     </button>
   </div>
+  <!-- Registration button end -->
 </form>
