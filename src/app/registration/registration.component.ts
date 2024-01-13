@@ -61,12 +61,14 @@ export class RegistrationComponent implements OnInit {
 
   addExperience() {
     const expGroup = new FormGroup({
-      company: new FormControl('', Validators.required),
-      position: new FormControl('', Validators.required),
-      years: new FormControl('', Validators.required),
-      startDate: new FormControl('', Validators.required),
-      endDate: new FormControl('', Validators.required),
+      company: new FormControl(''),
+      position: new FormControl(''),
+      years: new FormControl(''),
+      startDate: new FormControl(''),
+      endDate: new FormControl(''),
     });
+
+    console.log(expGroup);
 
     (<FormArray>this.registrationForm.get('experience')).push(expGroup);
   }
